@@ -179,8 +179,8 @@ if (PIN_H(PIN2)) {}	// Истинно, если на входе порта пр�
 
 
 #define _PM_BITNUM(port,bit,val)	(bit)
-#define BITNUM(x)			_PM_BITNUM(x)
-#define BITMASK(x)			(1U<<PM_BITNUM(x))
+#define BITNUM(pin)			_PM_BITNUM(pin)
+#define BITMASK(pin)			(1U << _PM_BITNUM(pin))
 
 
 
@@ -266,7 +266,7 @@ do {\
 	(GPIO##port->CR##LHn &= ~(GPIO_CR##LHn##_CNF##bit | GPIO_CR##LHn##_MODE##bit))
 
 // ANALOG, NONE
-#define	_PM_ANALOGNONE(port,bit,LHn)	PM_SETANALOG(port,bit,LHn)
+#define	_PM_ANALOGNONE(port,bit,LHn)	_PM_ANALOG(port,bit,LHn)
 
 
 
@@ -279,10 +279,10 @@ do {\
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// mode = OUTPP, OUTOD, OUTAFPP, OUTAFOD, IN, ANALOG
-// param = LS, MS, HS, PULLUP, PULLDOWN, NONE
-#define	DRIVER(x,mode,param)		_PM_DRIVER(x,mode,param)
-#define	PULL(x,param)			_PM_PULL(x,param)
+// mode: OUTPP, OUTOD, OUTAFPP, OUTAFOD, IN, ANALOG
+// param: LS, MS, HS, PULLUP, PULLDOWN, NONE
+#define	DRIVER(pin,mode,param)		_PM_DRIVER(pin,mode,param)
+#define	PULL(pin,param)			_PM_PULL(pin,param)
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -303,12 +303,12 @@ do {\
 
 
 ///////////////////////////////////////////////////////////////////////////////
-#define SET(x)				_PM_SETH(x)
-#define CLR(x)				_PM_SETL(x)
-#define ON(x)				_PM_SET(x)
-#define OFF(x)				_PM_CLR(x)
-#define CPL(x)				_PM_CPL(x)
-#define TOGGLE(x)			_PM_CPL(x)
+#define SET(pin)			_PM_SETH(pin)
+#define CLR(pin)			_PM_SETL(pin)
+#define ON(pin)				_PM_SET(pin)
+#define OFF(pin)			_PM_CLR(pin)
+#define CPL(pin)			_PM_CPL(pin)
+#define TOGGLE(pin)			_PM_CPL(pin)
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -325,12 +325,12 @@ do {\
 
 
 ///////////////////////////////////////////////////////////////////////////////
-#define ACTIVE(x)			_PM_PIN(x)
-#define PIN_H(x)			_PM_PINH(x)
-#define PIN_L(x)			_PM_PINL(x)
-#define	LATCH_H(x)			_PM_LATCHH(x)
-#define	LATCH_L(x)			_PM_LATCHL(x)
-#define LATCH(x)			_PM_LATCH(x)
+#define ACTIVE(pin)			_PM_PIN(pin)
+#define PIN_H(pin)			_PM_PINH(pin)
+#define PIN_L(pin)			_PM_PINL(pin)
+#define	LATCH_H(pin)			_PM_LATCHH(pin)
+#define	LATCH_L(pin)			_PM_LATCHL(pin)
+#define LATCH(pin)			_PM_LATCH(pin)
 ///////////////////////////////////////////////////////////////////////////////
 
 #endif
